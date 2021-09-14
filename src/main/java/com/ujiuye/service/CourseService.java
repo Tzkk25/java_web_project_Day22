@@ -9,4 +9,20 @@ public interface CourseService {
     public int getCountRowsByCourseName(String courseName);
 
     public List<Course> getCourseByCourseName(String courseName, PageUtil pu);
+
+    public String addCourse(Course c);
+
+    public String delAll(String cids);
+
+    public String editCourse(Course c);
+
+    public List<Course> getAllCourse();
+
+    public List<Course> getCourseByType(int courseType,int count);
+
+    //小U课堂课程详情页面的显示
+    public int getCountRows();
+    //小U课堂课程详情分页的显示
+    public List<Course> getCourse(PageUtil pu);
+
 }

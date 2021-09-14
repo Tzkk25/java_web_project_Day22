@@ -110,4 +110,52 @@ public class UserDaoImpl implements UserDao {
         }
         return rows;
     }
+
+    @Override
+    public User getUserByUid(int uid) {
+        User u = null;
+        String sql = "select * from user where uid=?";
+        try {
+            u = qr.query(sql,new BeanHandler<>(User.class),uid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return u;
+    }
+
+    @Override
+    public User checkPhone(String phone) {
+        User user = null;
+        String sql = "select * from user where phone=?";
+        try {
+            user = qr.query(sql,new BeanHandler<>(User.class),phone);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public int regist(User user) {
+        int rows = 0;
+        String sql = "insert into user(name,phone,password,status,createtime,role) values(?,?,?,?,?,?)";
+        try {
+            rows = qr.update(sql,user.getName(),user.getPhone(),user.getPassword(),user.getStatus(),user.getCreatetime(),user.getRole());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rows;
+    }
+
+    @Override
+    public User userLogin(String phone, String password) {
+        User user = null;
+        String sql = "select * from user where phone=? and password=?";
+        try {
+            user = qr.query(sql,new BeanHandler<>(User.class),phone,password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

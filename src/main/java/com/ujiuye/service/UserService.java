@@ -22,4 +22,10 @@ public interface UserService {
     public String delAll(String uids);
     //修改数据
     public String editUser(User user);
+    //小U课堂中注册功能模块的检测手机号是否被注册
+    public String checkPhone(String phone);
+    //小U课堂中的注册功能
+    public String regist(User user);
+    //小U课堂中的登录功能
+    public String userLogin(String phone, String password);
 }

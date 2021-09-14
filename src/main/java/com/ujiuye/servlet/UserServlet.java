@@ -112,7 +112,8 @@ public class UserServlet extends BaseServlet {
         out.print(res);
         out.close();
     }
-
+    //edit:编辑
+    //编辑用户信息
     protected void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int uid = Integer.parseInt(request.getParameter("uid"));
         String username = request.getParameter("username");
@@ -126,6 +127,34 @@ public class UserServlet extends BaseServlet {
         User user = new User(uid,name,phone,age,sex,username,password,null,status,null,role);
         String res = us.editUser(user);
         PrintWriter out = response.getWriter();
+        out.print(res);
+        out.close();
+    }
+
+    //验证小U课堂的注册功能的手机号码
+    protected void checkPhone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String phone = request.getParameter("phone");
+        String res = us.checkPhone(phone);
+        PrintWriter out = response.getWriter();
+        out.print(res);
+        out.close();
+    }
+    protected void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String password = request.getParameter("password");
+        User user = new User(0,name,phone,0,0,null,password,null,1,new Date(),2);
+        String res = us.regist(user);
+        PrintWriter out = response.getWriter();
+        out.print(res);
+        out.close();
+    }
+    protected void userLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String phone = request.getParameter("phone");
+        String password = request.getParameter("password");
+        String res = us.userLogin(phone,password);
+        PrintWriter out = response.getWriter();
+        System.out.println(res);
         out.print(res);
         out.close();
     }

@@ -106,4 +106,45 @@ public class UserServiceImpl implements UserService {
         return JsonUtil.toJson(ru);
     }
 
+    @Override
+    public String checkPhone(String phone) {
+        ResultUtil ru = null;
+        User user = ud.checkPhone(phone);
+        if (user == null){
+            //数据库中没有此号码被注册,可以使用
+            ru = new ResultUtil(0,"能使用",null);
+        }else{
+            //数据库中能查到此号码被注册,不可以使用
+            ru = new ResultUtil(1,"手机号已经被注册",null);
+        }
+        return JsonUtil.toJson(ru);
+    }
+
+    @Override
+    public String regist(User user) {
+        ResultUtil ru = null;
+        int rows = ud.regist(user);
+        if(rows == 0){
+            ru = new ResultUtil(0,"注册失败,请稍后再试",null);
+        }else {
+            ru = new ResultUtil(1,"注册成功",null);
+        }
+        return JsonUtil.toJson(ru);
+    }
+
+    @Override
+    public String userLogin(String phone, String password) {
+        ResultUtil ru = null;
+        User user= ud.userLogin(phone,password);
+        if(user == null){
+            ru = new ResultUtil(0,"账号密码有误,请重新输入",null);
+        }else{
+            if (user.getStatus()==1){
+                ru = new ResultUtil(1,"登录成功",user);
+            }else{
+                ru = new ResultUtil(2,"账号被禁用,无法登录",null);
+            }
+        }
+        return JsonUtil.toJson(ru);
+    }
 }

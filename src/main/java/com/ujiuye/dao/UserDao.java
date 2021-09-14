@@ -22,4 +22,12 @@ public interface UserDao {
     public int delAll(String uids);
     //修改方法
     public int editUser(User user);
+    //通过id查询到对应的用户信息
+    public User getUserByUid(int uid);
+    //小U课堂中的注册功能中的检查手机号是否存在
+    User checkPhone(String phone);
+    //小U课堂界面的注册功能
+    int regist(User user);
+    //小U课堂登录功能
+    User userLogin(String phone,String password);
 }
