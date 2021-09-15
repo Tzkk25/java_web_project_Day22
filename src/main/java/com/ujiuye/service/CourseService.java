@@ -21,8 +21,10 @@ public interface CourseService {
     public List<Course> getCourseByType(int courseType,int count);
 
     //小U课堂课程详情页面的显示
-    public int getCountRows();
-    //小U课堂课程详情分页的显示
-    public List<Course> getCourse(PageUtil pu);
+    public int getCountRows(String courseType, String courseName);
 
+    //小U课堂课程详情分页的显示
+    public List<Course> getCourse(PageUtil pu, String courseType, String courseName);
+
+    public Course getCourseByCid(int cid);
 }

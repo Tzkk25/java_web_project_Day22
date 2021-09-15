@@ -19,13 +19,15 @@ public interface CourseDao {
     //通过id查询课程报名信息分页展示
     public Course getCourseByCid(int cid);
     //用户课程信息展示
-    List<Course> getAllCourse();
+    public List<Course> getAllCourse();
     //2021-9-13
     //小U课堂信息展示
-    List<Course> getCourseByType(int courseType,int count);
+    public List<Course> getCourseByType(int courseType,int count);
     //2021-9-14
     //小U课堂课程详细页面显示(显示所有的课程信息)
-    int getCountRows();
+
     //小U课堂课程详细页面显示(根据分页信息获取对应的课程集合)
-    List<Course> getCourse(PageUtil pu);
+    public int getCountRows(String courseType, String courseName);
+
+    public List<Course> getCourse(PageUtil pu, String courseType, String courseName);
 }

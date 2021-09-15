@@ -3,6 +3,7 @@ package com.ujiuye.servlet;
 import com.ujiuye.entity.CourseDetail;
 import com.ujiuye.service.CourseDetailService;
 import com.ujiuye.service.impl.CourseDetailServiceImpl;
+import com.ujiuye.util.JsonUtil;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/courseDetailServlet")
@@ -35,4 +37,12 @@ public class CourseDetailServlet extends BaseServlet {
         out.close();
     }
 
-}
+    protected void getDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, IllegalAccessException {
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        Map<String, List<CourseDetail>> map = cds.getDetail(cid);
+        PrintWriter out = response.getWriter();
+        out.print(JsonUtil.toJson(map));
+        out.close();
+    }
+
+    }

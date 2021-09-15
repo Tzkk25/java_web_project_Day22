@@ -7,6 +7,9 @@ import com.ujiuye.service.CourseDetailService;
 import com.ujiuye.util.JsonUtil;
 import com.ujiuye.util.ResultUtil;
 
+import java.util.List;
+import java.util.Map;
+
 public class CourseDetailServiceImpl implements CourseDetailService {
     CourseDetailDao cdd = new CourseDetailDaoImpl();
     @Override
@@ -19,6 +22,11 @@ public class CourseDetailServiceImpl implements CourseDetailService {
             ru = new ResultUtil(1,"添加信息成功",null);
         }
         return JsonUtil.toJson(ru);
+    }
+
+    @Override
+    public Map<String, List<CourseDetail>> getDetail(int cid) {
+        return cdd.getDetail(cid);
     }
 
 }

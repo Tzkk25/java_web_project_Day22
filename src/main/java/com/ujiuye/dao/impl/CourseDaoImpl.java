@@ -114,9 +114,12 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public int getCountRows() {
+    public int getCountRows(String courseType, String courseName) {
         int countRows = 0;
-        String sql = "select count(*) from course";
+        String sql = "select count(*) from course where courseName like'%"+courseName+"%'";
+        if (courseType != null && !"".equals(courseType)){
+            sql += " and courseType="+courseType;
+        }
         try {
             countRows = (int)(long)qr.query(sql,new ScalarHandler());
         } catch (SQLException e) {
@@ -126,11 +129,15 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public List<Course> getCourse(PageUtil pu) {
+    public List<Course> getCourse(PageUtil pu, String courseType, String courseName) {
         List<Course> list = null;
-        String sql = "select * from course limit ?,?";
+        String sql = "select * from course where courseName like '%"+courseName+"%'";
+        if(courseType != null && !"".equals(courseType)){
+            sql += " and courseType="+courseType;
+        }
+        sql += " limit ?,?";
         try {
-            list = qr.query(sql,new BeanListHandler<>(Course.class),pu.getIndex(),pu.getRows());
+            list = qr.query(sql, new BeanListHandler<>(Course.class), pu.getIndex(), pu.getRows());
         } catch (SQLException e) {
             e.printStackTrace();
         }

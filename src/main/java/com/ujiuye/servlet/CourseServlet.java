@@ -142,15 +142,25 @@ public class CourseServlet extends BaseServlet {
         out.print(JsonUtil.toJson(list));
         out.close();
     }
+
     protected void getCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, IllegalAccessException {
+        String courseType = request.getParameter("courseType");
+        String courseName = request.getParameter("search");
         String page = request.getParameter("page");
         int rows = Integer.parseInt(request.getParameter("rows"));
-        int countRows = cs.getCountRows();
+        int countRows = cs.getCountRows(courseType,courseName);
         PageUtil pu = new PageUtil(page,rows,countRows);
-        List<Course> list = cs.getCourse(pu);
+        List<Course> list = cs.getCourse(pu,courseType,courseName);
         pu.setList(list);
         PrintWriter out = response.getWriter();
         out.print(JsonUtil.toJson(pu));
         out.close();
     }
-}
+    protected void getCourseByCid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, IllegalAccessException {
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        Course c = cs.getCourseByCid(cid);
+        PrintWriter out = response.getWriter();
+        out.print(JsonUtil.toJson(c));
+        out.close();
+    }
+    }

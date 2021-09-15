@@ -1,5 +1,7 @@
 package com.ujiuye.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Course {
@@ -11,6 +13,7 @@ public class Course {
     private String courseVideo;
     private String coursePrice;
     private int status; // 课程状态 0：未上架  1：上架 2：下架
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     public Course() {

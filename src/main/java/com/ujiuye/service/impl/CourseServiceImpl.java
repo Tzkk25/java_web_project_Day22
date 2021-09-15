@@ -69,12 +69,18 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public int getCountRows() {
-        return cd.getCountRows();
+    public int getCountRows(String courseType, String courseName) {
+        return cd.getCountRows(courseType,courseName);
     }
 
     @Override
-    public List<Course> getCourse(PageUtil pu) {
-        return cd.getCourse(pu);
+    public List<Course> getCourse(PageUtil pu, String courseType, String courseName) {
+        return cd.getCourse(pu,courseType,courseName);
     }
+
+    @Override
+    public Course getCourseByCid(int cid) {
+        return cd.getCourseByCid(cid);
+    }
+
 }
